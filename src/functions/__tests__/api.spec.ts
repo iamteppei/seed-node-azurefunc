@@ -1,5 +1,5 @@
 import { handler } from '../api';
-import { getContextObject } from '../__mocks__/date.data';
+import { getContextObject } from '../__mocks__/data.data';
 jest.mock('../../common/mongo.ts', () => ({
   connectMongo: jest.fn()
 }));

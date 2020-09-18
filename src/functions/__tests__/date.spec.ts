@@ -1,4 +1,4 @@
-import { getContextObject } from '../__mocks__/date.data';
+import { getContextObject } from '../__mocks__/data.data';
 import { handler } from '../date';
 
 describe('functions date', () => {

@@ -1,5 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { connectMongo, MONGO_DB_NAME } from '../mongo';
+import { connectMongo } from '../mongo';
 import mongoose from 'mongoose';
 
 describe('dbConnect', () => {
@@ -17,7 +17,7 @@ describe('dbConnect', () => {
       mongod.stop();
     });
 
-    it(`should reject if ${MONGO_DB_NAME} is not provided`, async () => {
+    it(`should reject if MONGO_DB_NAME is not provided`, async () => {
       process.env.MONGO_USER_PARAM = '';
       process.env.MONGO_PASSWORD = '';
       process.env.MONGO_DB_NAME = '';

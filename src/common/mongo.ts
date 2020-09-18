@@ -1,10 +1,5 @@
 import { connect, connection } from 'mongoose';
 
-export const MONGO_USER_PARAM = 'MONGO_USER';
-export const MONGO_PASS_PARAM = 'MONGO_PASS';
-export const MONGO_DB_NAME = 'MONGO_DB_NAME';
-export const MONGO_HOSTS = 'MONGO_HOSTS';
-
 export const connectMongo = (): Promise<void> =>
   new Promise<void>((resolve, reject) => {
     const user = process.env.MONGO_USER_PARAM || '';
@@ -15,7 +10,7 @@ export const connectMongo = (): Promise<void> =>
     const dbUri = `mongodb://${user}:${pass}@${host}/${dbName}`;
 
     if (!dbName) {
-      return reject(`No ${MONGO_DB_NAME} is provided`);
+      return reject(`No MONGO_DB_NAME is provided`);
     }
 
     connection.once('open', () => resolve());
