@@ -23,9 +23,28 @@ A seed project for Serverless Function REST API
 - To run the test cases without watch mode use `npm run test`
 - To run the test coverage without watch mode use `npm run test:cov`
 
+## Setup ENV variables
+
+Create **serverless.env.local.yml** at the same level with serverless.yaml and update with your local configuration
+
+```yaml
+API_ROUTE: '/api'
+MONGO_USER_PARAM: <db user name>
+MONGO_PASSWORD: <db pwd>
+MONGO_DB_NAME: <db name>
+MONGO_HOSTS: <db host>
+```
+
+## Access URL
+
+```bash
+GET /api/core/ping
+```
+
 ## Test
 
 - Unit Test: We are using Jest for assertion and mocking
+
 
 ## Git Hooks
 The seed uses `husky` to enable commit hook.

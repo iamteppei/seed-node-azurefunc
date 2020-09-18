@@ -106,3 +106,5 @@ dist
 
 api/
 date/
+
+*.local.*

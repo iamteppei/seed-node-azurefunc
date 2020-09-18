@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: ms-seed-node
+service: your-service # follow Azure naming convention
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -27,61 +27,69 @@ provider:
   region: West US 2
   runtime: nodejs12
   # os: windows  # windows is default, linux is available
-  # prefix: "sample"  # prefix of generated resource name
+  prefix: ${opt:prefix, 'dev'}  # prefix of generated resource name
   # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
-  stage: dev
+  stage: ${opt:stage, 'dev'}
   # type: premium  # premium azure functions
-  environment: # these will be created as application settings
-    API_ROUTE: '/api/v1'
-    MONGO_USER_PARAM: 'belpro'
-    MONGO_PASSWORD: 'default'
-    MONGO_DB_NAME: 'belpro'
-    MONGO_HOSTS: 'localhost'
+  environment: ${file(./serverless.env.${opt:env, 'default'}.yml)} # these will be created as application settings
   # you can define apim configuration here
-  # apim:
-  #   apis:
-  #     - name: v1
-  #       subscriptionRequired: false # if true must provide an api key
-  #       displayName: v1
-  #       description: V1 sample app APIs
-  #       protocols:
-  #         - https
-  #       path: v1
-  #       tags:
-  #         - tag1
-  #         - tag2
-  #       authorization: none
-  #   cors:
-  #     allowCredentials: false
-  #     allowedOrigins:
-  #       - "*"
-  #     allowedMethods:
-  #       - GET
-  #       - POST
-  #       - PUT
-  #       - DELETE
-  #       - PATCH
-  #     allowedHeaders:
-  #       - "*"
-  #     exposeHeaders:
-  #       - "*"
+  apim:
+    apis:
+      - name: core-api
+        subscriptionRequired: false # if true must provide an api key
+        displayName: Core API
+        description: Core API
+        protocols:
+          - https
+          - http # TODO remove http later
+        path: core
+        tags:
+          - core_api
+        authorization: none
+        sku: Basic_1 # TODO change this on staging and production
+    backends:
+      - name: core-api-backend
+        url: core # point to api azure function
+    cors:
+      allowCredentials: false
+      allowedOrigins:
+        - "*" # TODO change this to real domain name
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      allowedHeaders:
+        - "*"
+      exposeHeaders:
+        - "*"
 
 plugins:
   - serverless-azure-functions
   - serverless-webpack
 
 functions:
-  api:
+  coreApi: 
     handler: src/functions/api.handler
+    name: $return
     events:
       - http:
           method: ANY
-        route: v1/{*restOfPath}
-  date:
-    handler: src/functions/date.handler
-    events:
-      - http:
-          method: GET
+        route: core/{*restOfPath}
+        authLevel: anonymous
+    apim:
+      api: core-api
+      backend: core-api-backend
+      operations:
+        - method: GET
+          urlTemplate: /projects/{projectId}/models/{modelId}
+          displayName: getModelDetail
+          templateParameters:
+            - name: projectId
+              type: string
+            - name: modelId
+              type: string             
   # The following are a few examples of other events you can configure:
   # storageBlob:
   #   handler: src/handlers/storageBlob.printMessage

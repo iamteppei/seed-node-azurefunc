@@ -10,4 +10,4 @@
 ## REVIEW:
 * [ ] Unit test
 * [ ] Code structure
-* [ ] Code logicgit
+* [ ] Code logic 
