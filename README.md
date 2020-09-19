@@ -1,5 +1,12 @@
-# seed-node-function-api
+# seed-node-azurefunc
 A seed project for Serverless Function REST API
+
+Stack
+- Azure Function
+- Serverless Framework
+- Express JS
+- Typescript
+- MongoDB
 
 ## Version specification
 - node: v12.16.3

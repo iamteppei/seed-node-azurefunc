@@ -72,7 +72,7 @@ plugins:
 functions:
   coreApi: 
     handler: src/functions/api.handler
-    name: $return
+    name: $return # used when expose an async func. https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#exporting-an-async-function
     events:
       - http:
           method: ANY
