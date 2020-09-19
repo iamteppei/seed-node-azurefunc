@@ -83,13 +83,11 @@ functions:
       backend: core-api-backend
       operations:
         - method: GET
-          urlTemplate: /projects/{projectId}/models/{modelId}
-          displayName: getModelDetail
+          urlTemplate: /{your_name}
+          displayName: getSayHelloByName
           templateParameters:
-            - name: projectId
+            - name: your_name
               type: string
-            - name: modelId
-              type: string             
   # The following are a few examples of other events you can configure:
   # storageBlob:
   #   handler: src/handlers/storageBlob.printMessage

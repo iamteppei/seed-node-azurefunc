@@ -1,9 +1,6 @@
-import { AzureFunction, Context, HttpRequest } from '@azure/functions';
+import { AzureFunction, Context } from '@azure/functions';
 
-const getDate: AzureFunction = async function(
-  context: Context,
-  _: HttpRequest
-) {
+const getDate: AzureFunction = async function(context: Context) {
   context.log('Typescript HTTP trigger function processed a request.');
   context.res = {
     // status: 200, /* Defaults to 200 */

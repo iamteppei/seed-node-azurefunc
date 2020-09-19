@@ -28,7 +28,7 @@ A seed project for Serverless Function REST API
 Create **serverless.env.local.yml** at the same level with serverless.yaml and update with your local configuration
 
 ```yaml
-API_ROUTE: '/api'
+API_ROUTE: '/api/core'
 MONGO_USER_PARAM: <db user name>
 MONGO_PASSWORD: <db pwd>
 MONGO_DB_NAME: <db name>
@@ -38,7 +38,7 @@ MONGO_HOSTS: <db host>
 ## Access URL
 
 ```bash
-GET /api/core/ping
+GET http://localhost:7071/api/core/ping
 ```
 
 ## Test
