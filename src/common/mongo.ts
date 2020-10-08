@@ -2,15 +2,15 @@ import { connect, connection } from 'mongoose';
 
 export const connectMongo = (): Promise<void> =>
   new Promise<void>((resolve, reject) => {
-    const user = process.env.MONGO_USER_PARAM || '';
-    const pass = process.env.MONGO_PASSWORD || '';
-    const dbName = process.env.MONGO_DB_NAME || '';
-    const host = process.env.MONGO_HOSTS || '';
-
-    const dbUri = `mongodb://${user}:${pass}@${host}/${dbName}`;
+    const dbName = process.env.MONGO_DB_NAME;
+    const dbUri = process.env.MONGO_URI;
 
     if (!dbName) {
       return reject(`No MONGO_DB_NAME is provided`);
+    }
+
+    if (!dbUri) {
+      return reject(`No MONGO_URI is provided`);
     }
 
     connection.once('open', () => resolve());
@@ -22,8 +22,6 @@ export const connectMongo = (): Promise<void> =>
     connect(dbUri, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-      user,
-      pass,
       dbName
     });
   });

@@ -18,10 +18,15 @@ describe('dbConnect', () => {
     });
 
     it(`should reject if MONGO_DB_NAME is not provided`, async () => {
-      process.env.MONGO_USER_PARAM = '';
-      process.env.MONGO_PASSWORD = '';
       process.env.MONGO_DB_NAME = '';
-      process.env.MONGO_HOSTS = 'localhost';
+      process.env.MONGO_URI = 'localhost:27017';
+      const error = await connectMongo().catch(error => error);
+      expect(error).toBeDefined();
+    });
+
+    it(`should reject if MONGO_URI is not provided`, async () => {
+      process.env.MONGO_URI = '';
+      process.env.MONGO_DB_NAME = 'foo';
       const error = await connectMongo().catch(error => error);
       expect(error).toBeDefined();
     });
@@ -33,10 +38,8 @@ describe('dbConnect', () => {
           resolve();
         });
       });
-      process.env.MONGO_USER_PARAM = '';
-      process.env.MONGO_PASSWORD = '';
       process.env.MONGO_DB_NAME = 'test_db';
-      process.env.MONGO_HOSTS = 'localhost';
+      process.env.MONGO_URI = 'localhost';
       const error = await connectMongo().catch(error => error);
       expect(error).toBeDefined();
     });
