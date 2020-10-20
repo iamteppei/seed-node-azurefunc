@@ -35,7 +35,6 @@ Stack
 Create **serverless.env.local.yml** at the same level with serverless.yaml and update with your local configuration
 
 ```yaml
-API_ROUTE: '/api/core'
 MONGO_USER_PARAM: <db user name>
 MONGO_PASSWORD: <db pwd>
 MONGO_DB_NAME: <db name>

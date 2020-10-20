@@ -108,3 +108,5 @@ api/
 date/
 
 *.local.*
+
+*/function.json

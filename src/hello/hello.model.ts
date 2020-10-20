@@ -1,7 +1,6 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
-import { IBaseModel } from '../common/baseModel';
 
-export interface IHelloModel extends IBaseModel {
+export interface IHelloModel {
   word: string;
 }
 
