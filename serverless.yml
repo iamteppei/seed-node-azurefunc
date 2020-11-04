@@ -24,16 +24,18 @@ custom:
 
 provider:
   name: azure
-  region: West US 2
+  # region: West US 2 # passed by sls cli option
   runtime: nodejs12
   # os: windows  # windows is default, linux is available
   prefix: ${opt:prefix, 'dev'}  # prefix of generated resource name
   # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
   stage: ${opt:stage, 'dev'}
+  resourceGroup: func_${opt:stage, 'dev'}
   # type: premium  # premium azure functions
   environment: ${file(serverless.env.${opt:env, 'default'}.yml)} # these will be created as application settings
   # you can define apim configuration here
   apim:
+    name: apim_${opt:stage, 'dev'}
     apis:
       - name: core-api
         subscriptionRequired: false # if true must provide an api key

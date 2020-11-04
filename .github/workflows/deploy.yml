@@ -23,11 +23,12 @@ jobs:
       run: |
          npm ci
          npm run build --if-present
-         npm install serverless -g
          az login -u ${{ secrets.AZURE_USER }} -p ${{ secrets.AZURE_PASS }}
          curl https://raw.githubusercontent.com/serverless/serverless-azure-functions/master/scripts/generate-service-principal.sh -o sp.sh
          chmod +x sp.sh
          ./sp.sh
          source .env.servicePrincipal
-         sls deploy --stage ${{ secrets.AZURE_DEV }} -i ${{ secrets.AZURE_SUB }} -g ${{ secrets.AZURE_RG }} --region ${{ secrets.AZURE_REGION }} --mongo_user ${{ secrets.MONGO_USER }} --mongo_pwd ${{ secrets.MONGO_PWD }} --mongo_db_name ${{ secrets.MONGO_DB_NAME }} --mongo_host ${{ secrets.MONGO_HOST }}
-
+         npm run deploy -- --prefix dev --stage dev -i ${{ secrets.AZURE_SUB }} \ 
+          --region ${{ secrets.AZURE_REGION }} \
+          --mongo_uri "@Microsoft.KeyVault(SecretUri=${{ secrets.VAULT_URL }}mongoUri)" \
+          --mongo_db_name "@Microsoft.KeyVault(SecretUri=${{ secrets.VAULT_URL }}mongoDbName)"

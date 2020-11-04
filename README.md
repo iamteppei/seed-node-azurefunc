@@ -35,10 +35,8 @@ Stack
 Create **serverless.env.local.yml** at the same level with serverless.yaml and update with your local configuration
 
 ```yaml
-MONGO_USER_PARAM: <db user name>
-MONGO_PASSWORD: <db pwd>
 MONGO_DB_NAME: <db name>
-MONGO_HOSTS: <db host>
+MONGO_URI: <Mongodb connection string>
 ```
 
 ## Access URL
@@ -60,5 +58,3 @@ Whenever there is a commit, there will be check on lint, on failure commit fails
 
 ### Pre push
 Whenever there is a push, there will be check on test.
-
-## Working with Mongo migration script

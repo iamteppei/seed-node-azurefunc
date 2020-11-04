@@ -12,7 +12,8 @@
     "migrate:up": "migrate-mongo up",
     "migrate:down": "migrate-mongo down",
     "migrate:create": "migrate-mongo create",
-    "build": "sls offline build"
+    "build": "sls offline build",
+    "deploy": "SLS_DEBUG=* sls deploy"
   },
   "keywords": [
     "azure",
