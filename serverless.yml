@@ -21,51 +21,35 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-
+  # config:
+  #   servicePlanName: 
+  #   appInsightsName: 
+  #   functionAppName: 
+  #   storageName:
 provider:
   name: azure
   # region: West US 2 # passed by sls cli option
   runtime: nodejs12
-  # os: windows  # windows is default, linux is available
+  os: linux  # windows is default, linux is available
   prefix: ${opt:prefix, 'dev'}  # prefix of generated resource name
   # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
   stage: ${opt:stage, 'dev'}
   resourceGroup: func_${opt:stage, 'dev'}
-  # type: premium  # premium azure functions
+  # type: premium  # premium azure functions. supported values: consumption, ase, premium
+  # appServicePlan:
+  #   name: ${self:custom.config.servicePlanName}
+  #   sku:
+  #     tier: ElasticPremium
+  #     name: EP1
+  # appInsights:
+  #   name: ${self:custom.config.appInsightsName}
+  # functionApp:
+  #   name: ${self:custom.config.functionAppName}
+  # storageAccount:
+  #   name: ${self:custom.config.storageName}
   environment: ${file(serverless.env.${opt:env, 'default'}.yml)} # these will be created as application settings
   # you can define apim configuration here
-  apim:
-    name: apim_${opt:stage, 'dev'}
-    apis:
-      - name: core-api
-        subscriptionRequired: false # if true must provide an api key
-        displayName: Core API
-        description: Core API
-        protocols:
-          - https
-          - http # TODO remove http later
-        path: api
-        tags:
-          - core_api
-        authorization: none
-        sku: Basic_1 # TODO change this on staging and production
-    backends:
-      - name: core-api-backend
-        url: '' # point to api azure function
-    cors:
-      allowCredentials: false
-      allowedOrigins:
-        - "*" # TODO change this to real domain name
-      allowedMethods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      allowedHeaders:
-        - "*"
-      exposeHeaders:
-        - "*"
+  apim: false 
 
 plugins:
   - serverless-azure-functions
