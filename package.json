@@ -42,7 +42,7 @@
     "express": "^4.17.1",
     "express-joi-validation": "4.0.0",
     "joi-extract-type": "^15.0.8",
-    "mongoose": "^5.10.3"
+    "mongoose": "^6.13.9"
   },
   "devDependencies": {
     "@azure/functions": "^1.0.3",
