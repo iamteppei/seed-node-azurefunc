@@ -39,7 +39,7 @@
     "@hapi/joi": "~15",
     "azure-aws-serverless-express": "^0.1.5",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.22.0",
     "express-joi-validation": "4.0.0",
     "joi-extract-type": "^15.0.8",
     "mongoose": "^5.10.3"
